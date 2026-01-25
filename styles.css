@@ -1,0 +1,287 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lora', 'Times New Roman', serif;
+    line-height: 1.6;
+    color: #404040;
+    background-color: #ffffff;
+}
+
+.navbar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #eaeaea;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    color: #404040;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #008AFF;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-icons a {
+    color: #404040;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-icons a:hover {
+    color: #008AFF;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    min-height: calc(100vh - 200px);
+}
+
+.hero-section {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #404040;
+    margin-bottom: 3rem;
+}
+
+.hero-images {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: #404040;
+    font-size: 2rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #008AFF;
+    transform: translateY(-3px);
+}
+
+.content-section {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.content-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #404040;
+}
+
+.content-section h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #404040;
+}
+
+.content-section p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.content-section ul {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+}
+
+.content-section li {
+    margin-bottom: 0.5rem;
+}
+
+.publication-item {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.publication-item:last-child {
+    border-bottom: none;
+}
+
+.publication-title {
+    font-weight: 600;
+    color: #404040;
+    margin-bottom: 0.5rem;
+}
+
+.publication-authors {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.publication-venue {
+    color: #666;
+}
+
+sup {
+    font-size: 0.7em;
+    vertical-align: super;
+    margin-left: 2px;
+}
+
+sup a {
+    color: #008AFF;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+sup a:hover {
+    text-decoration: underline;
+}
+
+.finding-image {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.finding-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+    margin: 0.5rem auto;
+    max-width: 800px;
+    line-height: 1.4;
+}
+
+.finding-details {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.finding-details li {
+    margin-bottom: 0.5rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.finding-details strong {
+    color: #404040;
+}
+
+.contact-info {
+    font-size: 1.1rem;
+}
+
+.contact-info a {
+    color: #008AFF;
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #eaeaea;
+    padding: 2rem;
+    text-align: center;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #008AFF;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .social-links a {
+        font-size: 1.5rem;
+    }
+
+    .main-content {
+        padding: 2rem 1rem;
+    }
+}
