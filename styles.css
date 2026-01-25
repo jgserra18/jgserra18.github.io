@@ -85,6 +85,15 @@ body {
     margin-bottom: 1rem;
 }
 
+.flag-icon {
+    height: 2.5rem;
+    width: auto;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .hero-impact {
     max-width: 800px;
     margin: 0 auto 2rem auto;
