@@ -30,7 +30,6 @@
                 <!-- <a href="about.html">About me</a> -->
                 <a href="publications.html">Publications</a>
                 <a href="findings.html">Scientific findings</a>
-                <a href="#collaborations">Scientific collaborations</a>
                 <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank">My data</a>
                 <a href="resume.pdf" target="_blank">Resume</a>
                 <a href="contact.html">Contact</a>
@@ -92,17 +91,13 @@
               Loading collaborations…
             </p>
             
-            <p style="font-size: 0.9em; color: #555; font-style: italic;">
-              This map highlights the geographic reach of research collaborations, reflecting the global footprint of my work.
-            </p>
-            
-            <p style="font-size: 0.9em; color: #555; margin-top: 1rem;">
-              This map reflects active scientific collaborations. If you are interested in collaborating on nitrogen systems research, feel free to get in touch.
-            </p>
-            
-            <p style="font-size: 0.9em; color: #555; margin-top: 1rem;">
-              If you also want to be included here, please contact me.
-            </p>
+            <p style="font-size: 0.9em; color: #555; font-style: italic; margin-bottom: 1rem;">
+            This map highlights the geographic reach of research collaborations, reflecting the global footprint of my work.
+        </p>
+        
+        <p style="font-size: 0.9em; color: #555;">
+            Interested in collaborating on nitrogen systems research? <a href="contact.html">Get in touch</a>.
+        </p>
         </div>
     </main>
 
@@ -112,109 +107,132 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        const statusEl = document.getElementById("collab-status");
-        function setStatus(text) {
-            if (statusEl) statusEl.textContent = text;
-        }
-        
-        if (!document.getElementById("collab-map")) {
-            setStatus("Map status: error — map container not found.");
-        }
-        
-        // Initialize collaboration map
-        setStatus("Map status: loading basemap…");
-        const map = L.map("collab-map", {
-            scrollWheelZoom: false
-        }).setView([20, 0], 2);
-
-        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-            attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
-        }).addTo(map);
-
-        setTimeout(() => {
-            try {
-                map.invalidateSize();
-            } catch (e) {
-                // ignore
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set year
+            const yearElement = document.getElementById('year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
             }
-        }, 0);
 
-        // Load collaboration data
-        let geojson;
-
-        function countryStyle(feature) {
-            const n = Number(feature.properties.n_authors);
-            const ramp = [
-                "#FDE0DD", // 1
-                "#FBB4B9", // 2
-                "#F768A1", // 3
-                "#C51B8A", // 4-5
-                "#7A0177"  // 6+
-            ];
-
-            const idx = (n && n > 0)
-                ? (n >= 6 ? 4 : n >= 4 ? 3 : n >= 3 ? 2 : n >= 2 ? 1 : 0)
-                : -1;
-
-            return {
-                fillColor: (idx >= 0) ? ramp[idx] : "#f5f6f7",
-                weight: 0.5,
-                color: (idx >= 0) ? "#8E0152" : "#BFC6CC",
-                fillOpacity: (idx >= 0) ? 0.75 : 0.15
-            };
-        }
-
-        function onEachCountry(feature, layer) {
-            if (feature.properties.n_authors && feature.properties.n_authors > 0) {
-                const props = feature.properties || {};
-                const countryName = props.GEOUNIT || props.ADMIN || props.NAME || props.SOVEREIGNT || props.ISO_A3 || "";
-                const authors = (props.authors || "").trim();
-
-                layer.bindTooltip(
-                    `<strong>${countryName}</strong><br>
-                     ${authors}`,
-                    { sticky: true, opacity: 0.95 }
-                );
-
-                layer.on({
-                    mouseover: e => e.target.setStyle({ weight: 1.5, color: "#111", fillOpacity: 0.9 }),
-                    mouseout: e => geojson.resetStyle(e.target)
-                });
-            }
-        }
-
-        fetch("data/collaborations.geojson")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+            const statusEl = document.getElementById("collab-status");
+            function setStatus(text) {
+                if (statusEl) {
+                    statusEl.textContent = text;
                 }
-                return response.json();
-            })
-            .then(data => {
-                const featureCount = (data && data.features && data.features.length) ? data.features.length : 0;
-                console.log("First feature:", data.features && data.features[0]);
-                setStatus(`Map status: GeoJSON loaded (${featureCount} features). Rendering…`);
+            }
+            
+            // Check if map container exists
+            const mapContainer = document.getElementById("collab-map");
+            if (!mapContainer) {
+                setStatus("Map status: error — map container not found.");
+            } else {
+                // Initialize collaboration map
+                setStatus("Loading collaborations…");
+                const map = L.map("collab-map", {
+                    scrollWheelZoom: false
+                }).setView([20, 0], 2);
 
-                geojson = L.geoJSON(data, {
-                    style: countryStyle,
-                    onEachFeature: onEachCountry
+                L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+                    attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
                 }).addTo(map);
 
-                const bounds = geojson.getBounds();
-                if (bounds && bounds.isValid && bounds.isValid()) {
-                    map.fitBounds(bounds);
-                    setStatus(`Map status: rendered (${featureCount} features).`);
-                } else {
-                    setStatus(`Map status: GeoJSON loaded (${featureCount} features) but bounds are invalid.`);
-                }
-            })
-            .catch(error => {
-                console.error("Error loading collaboration data:", error);
-                setStatus(`Map status: error — ${error.message || error}`);
-            });
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
 
+                // Load collaboration data
+                let geojson;
+
+                function countryStyle(feature) {
+                    const n = Number(feature.properties.n_authors);
+                    const ramp = [
+                        "#FDE0DD", // 1
+                        "#FBB4B9", // 2
+                        "#F768A1", // 3
+                        "#C51B8A", // 4-5
+                        "#7A0177"  // 6+
+                    ];
+
+                    const idx = (n && n > 0)
+                        ? (n >= 6 ? 4 : n >= 4 ? 3 : n >= 3 ? 2 : n >= 2 ? 1 : 0)
+                        : -1;
+
+                    return {
+                        fillColor: (idx >= 0) ? ramp[idx] : "#f5f6f7",
+                        weight: 0.5,
+                        color: (idx >= 0) ? "#8E0152" : "#BFC6CC",
+                        fillOpacity: (idx >= 0) ? 0.75 : 0.15
+                    };
+                }
+
+                function onEachCountry(feature, layer) {
+                    if (feature.properties.n_authors && feature.properties.n_authors > 0) {
+                        const props = feature.properties || {};
+                        const countryName = props.GEOUNIT || props.ADMIN || props.NAME || props.SOVEREIGNT || props.ISO_A3 || "";
+                        const authors = (props.authors || "").trim();
+
+                        layer.bindTooltip(
+                            `<strong>${countryName}</strong><br>
+                             ${authors}`,
+                            { sticky: true, opacity: 0.95 }
+                        );
+
+                        layer.on({
+                            mouseover: e => e.target.setStyle({ weight: 1.5, color: "#111", fillOpacity: 0.9 }),
+                            mouseout: e => geojson.resetStyle(e.target)
+                        });
+                    }
+                }
+
+                fetch("data/collaborations.geojson")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const featureCount = (data && data.features && data.features.length) ? data.features.length : 0;
+                        setStatus(`Map status: rendered (${featureCount} countries).`);
+
+                        geojson = L.geoJSON(data, {
+                            style: countryStyle,
+                            onEachFeature: onEachCountry
+                        }).addTo(map);
+
+                        const bounds = geojson.getBounds();
+                        if (bounds && bounds.isValid && bounds.isValid()) {
+                            map.fitBounds(bounds);
+                            
+                            // Hide status after successful load
+                            setTimeout(() => {
+                                if (statusEl) statusEl.style.display = 'none';
+                            }, 3000);
+                        }
+                    })
+                    .catch(error => {
+                        const isLocalFile = window.location.protocol === 'file:';
+                        if (isLocalFile) {
+                            setStatus(`Map status: Local file detected - please serve via web server or visit live site`);
+                            // Add a helpful message for local viewing
+                            const helpDiv = document.createElement('div');
+                            helpDiv.innerHTML = `
+                                <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 4px; padding: 1rem; margin: 1rem 0; font-size: 0.9rem;">
+                                    <strong>Note:</strong> Due to browser security restrictions, the collaboration map cannot load when viewing this page locally (file:// protocol). 
+                                    <br><br>
+                                    <strong>Solutions:</strong><br>
+                                    1. Visit the live site: <a href="https://jgserra18.github.io" target="_blank">https://jgserra18.github.io</a><br>
+                                    2. Use a local web server (e.g., Python: <code>python -m http.server</code>)
+                                </div>
+                            `;
+                            statusEl.parentNode.insertBefore(helpDiv, statusEl.nextSibling);
+                        } else {
+                            setStatus(`Map status: error — ${error.message || error}`);
+                        }
+                    });
+            }
+        });
     </script>
 </body>
 </html>
