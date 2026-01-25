@@ -7,6 +7,7 @@
     <title>João Serra - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <nav class="navbar">
@@ -14,7 +15,7 @@
             <div class="nav-links">
                 <a href="research.html">Research</a>
                 <a href="profile.html">Profile</a>
-                <a href="about.html">About me</a>
+                <!-- <a href="about.html">About me</a> -->
                 <a href="publications.html">Publications</a>
                 <a href="findings.html">Scientific findings</a>
                 <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank">My data</a>
@@ -31,6 +32,10 @@
     <main class="main-content">
         <div class="hero-section">
             <h1 class="hero-title">João Serra</h1>
+            
+            <div class="hero-impact">
+                <p>Bridging agroecological modelling and policy assessment.</p>
+            </div>
             
             <div class="hero-images">
                 <img src="images/image1.jpg" alt="Professional image 1" class="hero-img">
@@ -55,6 +60,23 @@
                 </a>
             </div>
         </div>
+        
+        <div class="content-section">
+            <h2>Scientific Collaborations</h2>
+            <div id="collab-map" style="height: 500px; margin-bottom: 1rem;"></div>
+
+            <p id="collab-status" style="font-size: 0.85em; color: #666; margin-top: -0.5rem; margin-bottom: 1rem;">
+              Map status: initializing…
+            </p>
+            
+            <p style="font-size: 0.9em; color: #555;">
+              This map reflects active scientific collaborations. If you are interested in collaborating on nitrogen systems research, feel free to get in touch.
+            </p>
+            
+            <p style="font-size: 0.9em; color: #555; margin-top: 1rem;">
+              If you also want to be included here, please contact me.
+            </p>
+        </div>
     </main>
 
     <footer class="footer">
@@ -62,8 +84,111 @@
         <p>Powered by <a href="https://beautifuljekyll.com" target="_blank">Beautiful Jekyll</a></p>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        const statusEl = document.getElementById("collab-status");
+        function setStatus(text) {
+            if (statusEl) statusEl.textContent = text;
+        }
+        
+        if (!document.getElementById("collab-map")) {
+            setStatus("Map status: error — map container not found.");
+        }
+        
+        // Initialize collaboration map
+        setStatus("Map status: loading basemap…");
+        const map = L.map("collab-map", {
+            scrollWheelZoom: false
+        }).setView([20, 0], 2);
+
+        L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+            attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+        }).addTo(map);
+
+        setTimeout(() => {
+            try {
+                map.invalidateSize();
+            } catch (e) {
+                // ignore
+            }
+        }, 0);
+
+        // Load collaboration data
+        let geojson;
+
+        function countryStyle(feature) {
+            const n = Number(feature.properties.n_authors);
+            const ramp = [
+                "#FDE0DD", // 1
+                "#FBB4B9", // 2
+                "#F768A1", // 3
+                "#C51B8A", // 4-5
+                "#7A0177"  // 6+
+            ];
+
+            const idx = (n && n > 0)
+                ? (n >= 6 ? 4 : n >= 4 ? 3 : n >= 3 ? 2 : n >= 2 ? 1 : 0)
+                : -1;
+
+            return {
+                fillColor: (idx >= 0) ? ramp[idx] : "#f5f6f7",
+                weight: 0.5,
+                color: (idx >= 0) ? "#8E0152" : "#BFC6CC",
+                fillOpacity: (idx >= 0) ? 0.75 : 0.15
+            };
+        }
+
+        function onEachCountry(feature, layer) {
+            if (feature.properties.n_authors && feature.properties.n_authors > 0) {
+                const props = feature.properties || {};
+                const countryName = props.GEOUNIT || props.ADMIN || props.NAME || props.SOVEREIGNT || props.ISO_A3 || "";
+                const authors = (props.authors || "").trim();
+
+                layer.bindTooltip(
+                    `<strong>${countryName}</strong><br>
+                     ${authors}`,
+                    { sticky: true, opacity: 0.95 }
+                );
+
+                layer.on({
+                    mouseover: e => e.target.setStyle({ weight: 1.5, color: "#111", fillOpacity: 0.9 }),
+                    mouseout: e => geojson.resetStyle(e.target)
+                });
+            }
+        }
+
+        fetch("data/collaborations.geojson")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const featureCount = (data && data.features && data.features.length) ? data.features.length : 0;
+                console.log("First feature:", data.features && data.features[0]);
+                setStatus(`Map status: GeoJSON loaded (${featureCount} features). Rendering…`);
+
+                geojson = L.geoJSON(data, {
+                    style: countryStyle,
+                    onEachFeature: onEachCountry
+                }).addTo(map);
+
+                const bounds = geojson.getBounds();
+                if (bounds && bounds.isValid && bounds.isValid()) {
+                    map.fitBounds(bounds);
+                    setStatus(`Map status: rendered (${featureCount} features).`);
+                } else {
+                    setStatus(`Map status: GeoJSON loaded (${featureCount} features) but bounds are invalid.`);
+                }
+            })
+            .catch(error => {
+                console.error("Error loading collaboration data:", error);
+                setStatus(`Map status: error — ${error.message || error}`);
+            });
+
     </script>
 </body>
 </html>

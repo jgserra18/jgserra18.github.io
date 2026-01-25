@@ -7,6 +7,7 @@
     <title>Profile - João Serra</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <nav class="navbar">
@@ -14,7 +15,7 @@
             <div class="nav-links">
                 <a href="research.html">Research</a>
                 <a href="profile.html">Profile</a>
-                <a href="about.html">About me</a>
+                <!-- <a href="about.html">About me</a> -->
                 <a href="publications.html">Publications</a>
                 <a href="findings.html">Scientific findings</a>
                 <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank">My data</a>
@@ -38,10 +39,17 @@
                 (<a href="https://land-craft.dk/" target="_blank">Land-CRAFT</a>) and the Department of Agroecology, 
                 Aarhus University, Denmark.
                 <br><br>
-                My work focuses on farm- and landscape-scale nitrogen modelling, combining process-based models and data-driven approaches. 
-                This includes the development and application of <a href="https://ldndc.imk-ifu.kit.edu/" target="_blank">LandscapeDNDC</a> 
-                and FarmAC within integrated FarmScape modelling frameworks to assess nitrogen use efficiency, nitrate leaching, 
-                and greenhouse gas emissions.
+                Farm- and landscape-scale nitrogen modelling using process-based models and data-driven approaches.
+            </p>
+
+            <h2>Scientific Identity</h2>
+            <p>
+                I am a nitrogen systems scientist who bridges field observations with global assessments to expose overlooked nitrogen inputs and develop policy-relevant indicators. My work focuses on nitrogen use efficiency, environmental losses, and the science-policy interface in agricultural systems. I contribute to nitrogen governance initiatives through Land-CRAFT, EUNEP, and FAO collaborations to translate scientific evidence into actionable policy solutions.
+            </p>
+
+            <h2>Scientific Roles & Leadership</h2>
+            <p>
+                I serve as a member of the EU Nitrogen Expert Panel (Crop Working Group), contributing to European nitrogen policy development and assessment. As a team member of the FAO Cropland Nutrient Balance Team, I support global nutrient accounting and sustainable agriculture initiatives. I hold lead authorship responsibilities in the International Nitrogen Assessment, coordinating synthesis of scientific evidence on nitrogen cycling and environmental impacts across agricultural systems.
             </p>
 
             <h2>Education</h2>
@@ -57,25 +65,62 @@
             </ul>
 
             <h2>Professional Experience</h2>
+            <p>For detailed professional history, please see my <a href="resume.pdf" target="_blank">CV</a>.</p>
+
+            <h2>Methods & Modelling Frameworks</h2>
             <ul>
-                <li>
-                    <strong>Postdoctoral Researcher</strong> – Aarhus University, Denmark (2024–present)
-                </li>
-                <li>
-                    <strong>PhD Researcher</strong> – University of Lisbon & Aarhus University (2020–2024)
-                </li>
-                <li>
-                    <strong>Research Fellow</strong> – NitroPortugal H2020 Project, University of Lisbon (2018–2020)
-                </li>
+                <li><strong>Process-based models:</strong> <a href="https://ldndc.imk-ifu.kit.edu/" target="_blank">Landscape-DNDC</a>, <a href="https://github.com/aquacropos/aquacrop" target="_blank">AquaCrop-OSPy</a>, <a href="https://hess.copernicus.org/articles/19/3829/2015/" target="_blank">GlobWAT</a></li>
+                <li><strong>Machine learning:</strong> Keras, TensorFlow, mlr3</li>
+                <li><strong>Programming:</strong> Python, R</li>
             </ul>
+
+            <h2>Software Development</h2>
+
+            <h3>R environment</h3>
+            <ul>
+                <li>R package <a href="https://github.com/francagiannini/rCTOOL" target="_blank">rCTOOL</a> that provides a carbon turnover model for cropland soils (joint effort with Dr. Franca Gianni-Kurina, Aarhus University).</li>
+                <li>R package <a href="https://github.com/jgserra18/emepManure" target="_blank">emepManure</a> that provides an inventory-based approach to estimate NH3, N2O and NOx emissions from manure management systems.</li>
+                <li>R package <a href="https://github.com/jgserra18/livCH4ipcc" target="_blank">livCH4ipcc</a> that provides an inventory-based approach to estimate CH4 emissions from enteric fermentation and manure management systems.</li>
+            </ul>
+
+            <h3>Python environment</h3>
+            <ul>
+                <li>Development of an internal tool pyLDNDC to configure and run <a href="https://ldndc.imk-ifu.kit.edu/" target="_blank">Landscape-DNDC</a>.</li>
+                <li>Refactoring of internal AU model <a href="https://farmac.dk/" target="_blank">FarmAC</a> to Python package <a href="https://github.com/jgserra18/pyFarmAC" target="_blank">pyFarmAC</a>.</li>
+                <li>Development of FAO Global water balance model and formalization into Python package <a href="https://github.com/jgserra18/pyglobwb" target="_blank">pyglobwb</a>.</li>
+            </ul>
+
+            <h3>Data generated</h3>
+            <p>Conforming to FAIR principles, published datasets are available in the repository <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank">https://figshare.com/authors/Jo_o_Serra/14259032</a>.</p>
 
             <h2>Skills & Expertise</h2>
             <ul>
                 <li>Nitrogen cycling, nitrogen use efficiency, and sustainable nutrient management</li>
-                <li>Process-based biogeochemical modelling (LandscapeDNDC, FarmAC, AquaCrop)</li>
-                <li>Integration of field data, spatial datasets, and machine-learning approaches</li>
+                <li>Process-based biogeochemical modelling and data-driven approaches</li>
                 <li>Science–policy interface, nitrogen indicators, and policy-relevant assessments</li>
             </ul>
+
+            <h2>Scientific Collaborations</h2>
+            <div id="collab-map" style="height: 500px; margin-bottom: 1rem;"></div>
+            
+            <p style="font-size: 0.9em; color: #555;">
+              This map reflects active scientific collaborations. If you are interested in collaborating on nitrogen systems research, feel free to get in touch.
+            </p>
+            
+            <p style="font-size: 0.9em; color: #555; margin-top: 1rem;">
+              If you also want to be included here, please contact me.
+            </p>
+
+            <h3>Collaborators by country</h3>
+            <table id="coauthor-table">
+                <thead>
+                    <tr>
+                        <th>Country</th>
+                        <th>Co-authors</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </main>
 
@@ -84,8 +129,56 @@
         <p>Powered by <a href="https://beautifuljekyll.com" target="_blank">Beautiful Jekyll</a></p>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Initialize collaboration map
+        const map = L.map("collab-map", {
+            scrollWheelZoom: false
+        }).setView([20, 0], 2);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors"
+        }).addTo(map);
+
+        // Load collaboration data
+        fetch("images/collaborations.geojson")
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    style: feature => ({
+                        fillColor: feature.properties.n_authors ? "#4C97A3" : "#f0f0f0",
+                        weight: 0.5,
+                        color: "#555",
+                        fillOpacity: feature.properties.n_authors ? 0.7 : 0.2
+                    }),
+                    onEachFeature: (feature, layer) => {
+                        if (feature.properties.n_authors) {
+                            layer.bindPopup(
+                                `<strong>${feature.properties.GEOUNIT}</strong><br>
+                                 ${feature.properties.n_authors} collaborators<br><br>
+                                 ${feature.properties.authors}`
+                            );
+                        }
+                    }
+                }).addTo(map);
+            });
+
+        // Load co-author table
+        fetch("images/coauthors_by_country.csv")
+            .then(response => response.text())
+            .then(text => {
+                const rows = text.trim().split("\n").slice(1);
+                const tbody = document.querySelector("#coauthor-table tbody");
+
+                rows.forEach(row => {
+                    const [author, country] = row.split(",");
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `<td>${country}</td><td>${author}</td>`;
+                    tbody.appendChild(tr);
+                });
+            });
     </script>
 </body>
 </html>
