@@ -19,90 +19,85 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
+            <a href="index.html" class="nav-brand">João Serra</a>
             <div class="nav-links">
                 <a href="research.html">Research</a>
                 <a href="profile.html">Profile</a>
                 <!-- <a href="about.html">About me</a> -->
                 <a href="publications.html">Publications</a>
                 <a href="findings.html">Scientific findings</a>
-                <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank">My data</a>
-                <a href="resume.pdf" target="_blank">Resume</a>
+                <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank" rel="noopener">My data</a>
+                <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
                 <a href="contact.html">Contact</a>
-            </div>
-            <div class="nav-icons">
-                <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
-                <a href="index.html" class="home-icon"><i class="fas fa-home"></i></a>
             </div>
         </div>
     </nav>
 
     <main class="main-content">
-        <div class="hero-section">
-            <h1 class="hero-title">João Serra <img src="images/portugal_flag.jpg" alt="Flag of Portugal" class="flag-icon"></h1>
-            
-            <div class="hero-impact">
-                <p>Bridging agroecological modelling and nitrogen governance for sustainable food systems.</p>
-            </div>
-            
-            <div class="hero-summary">
-                <p>Postdoctoral researcher working at the interface of agroecological modelling and nitrogen governance, with active collaborations across Europe, North America, Asia, and Oceania.</p>
-            </div>
-            
-            <div class="hero-cta">
-                <a href="#findings" class="cta-link">Explore key findings →</a>
-                <a href="#collaborations" class="cta-link">View scientific collaborations →</a>
-                <a href="publications.html" class="cta-link">Browse publications & data →</a>
-            </div>
-            
-            <div class="hero-images">
-                <img src="images/image1.jpg" alt="Professional image 1" class="hero-img">
-                <img src="images/image2.jpeg" alt="Professional image 2" class="hero-img">
-            </div>
-            
-            <div class="social-links">
-                <a href="mailto:jserra@agro.au.dk" title="Email me">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://github.com/jgserra18" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://orcid.org/0000-0002-3561-5350" target="_blank" title="ORCID">
-                    <i class="fab fa-orcid"></i>
-                </a>
-                <a href="https://scholar.google.com/citations?user=wlSztncAAAAJ" target="_blank" title="Google Scholar">
-                    <i class="fas fa-graduation-cap"></i>
-                </a>
-                <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank" title="My data">
-                    <i class="fas fa-database"></i>
-                </a>
-            </div>
-        </div>
-        
-        <div class="content-section" id="collaborations">
-            <h2>Scientific Collaborations</h2>
-            <div id="collab-map" style="height: 500px; margin-bottom: 1rem;"></div>
+        <section class="hero-section">
+            <div class="hero-text">
+                <p class="eyebrow">Postdoctoral researcher &middot; Aarhus University</p>
+                <h1 class="hero-title">João Serra<img src="images/portugal_flag.jpg" alt="Flag of Portugal" class="flag-icon"></h1>
 
-            <p id="collab-status" style="font-size: 0.85em; color: #666; margin-top: -0.5rem; margin-bottom: 1rem;">
-              Loading collaborations…
-            </p>
-            
-            <p style="font-size: 0.9em; color: #555; font-style: italic; margin-bottom: 1rem;">
-            This map highlights the geographic reach of research collaborations, reflecting the global footprint of my work.
-        </p>
-        
-        <p style="font-size: 0.9em; color: #555;">
-            Interested in collaborating on nitrogen systems research? <a href="contact.html">Get in touch</a>.
-        </p>
-        </div>
+                <div class="hero-impact">
+                    <p>Bridging agroecological modelling and nitrogen governance for sustainable food systems.</p>
+                </div>
+
+                <div class="hero-summary">
+                    <p>Working at the interface of agroecological modelling and nitrogen governance, with active collaborations across Europe, North America, Asia, and Oceania.</p>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="findings.html" class="cta-link">Explore key findings</a>
+                    <a href="#collaborations" class="cta-link">View scientific collaborations</a>
+                    <a href="publications.html" class="cta-link">Browse publications &amp; data</a>
+                </div>
+
+                <div class="social-links">
+                    <a href="mailto:jserra@agro.au.dk" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/jgserra18" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://orcid.org/0000-0002-3561-5350" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID"><i class="fab fa-orcid"></i></a>
+                    <a href="https://scholar.google.com/citations?user=wlSztncAAAAJ" target="_blank" rel="noopener" title="Google Scholar" aria-label="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="https://figshare.com/authors/Jo_o_Serra/14259032" target="_blank" rel="noopener" title="My data" aria-label="My data"><i class="fas fa-database"></i></a>
+                </div>
+            </div>
+
+            <div class="hero-media">
+                <img src="images/image1.jpg" alt="Portrait of João Serra" class="hero-img">
+                <img src="images/image2.jpeg" alt="João Serra outdoors" class="hero-img hero-img-secondary">
+            </div>
+        </section>
+
+        <section class="content-section home-section" id="collaborations">
+            <p class="eyebrow">Network</p>
+            <h2>Scientific Collaborations</h2>
+            <p class="section-lede">The geographic reach of my research collaborations. Hover over a country to see co-authors.</p>
+
+            <p id="collab-status">Loading collaborations…</p>
+            <div id="collab-map"></div>
+
+            <div class="map-meta">
+                <div class="map-legend" aria-hidden="true">
+                    <span>Co-authors</span>
+                    <span class="swatch" style="background:#d9e7e0"></span>
+                    <span class="swatch" style="background:#a9c9bb"></span>
+                    <span class="swatch" style="background:#6fa18f"></span>
+                    <span class="swatch" style="background:#3f7666"></span>
+                    <span class="swatch" style="background:#1f4a3e"></span>
+                    <span>1 &rarr; 6+</span>
+                </div>
+                <p>Interested in collaborating on nitrogen systems research? <a href="contact.html">Get in touch</a>.</p>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
-        <p>© João Serra | Research portfolio 2026</p>
+        <p>&copy; <span id="year">2026</span> João Serra</p>
     </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -133,8 +128,9 @@
                     scrollWheelZoom: false
                 }).setView([20, 0], 2);
 
-                L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-                    attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+                L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+                    attribution: "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ",
+                    maxZoom: 16
                 }).addTo(map);
 
                 setTimeout(() => {
@@ -143,15 +139,20 @@
 
                 // Load collaboration data
                 let geojson;
+                const countryNames = {
+                    AUT: "Austria", CHN: "China", DEU: "Germany", DNK: "Denmark", ESP: "Spain",
+                    FRA: "France", GRC: "Greece", JPN: "Japan", NLD: "Netherlands", PRT: "Portugal",
+                    ROU: "Romania", SWE: "Sweden", UKR: "Ukraine", USA: "United States"
+                };
 
                 function countryStyle(feature) {
                     const n = Number(feature.properties.n_authors);
                     const ramp = [
-                        "#FDE0DD", // 1
-                        "#FBB4B9", // 2
-                        "#F768A1", // 3
-                        "#C51B8A", // 4-5
-                        "#7A0177"  // 6+
+                        "#d9e7e0", // 1
+                        "#a9c9bb", // 2
+                        "#6fa18f", // 3
+                        "#3f7666", // 4-5
+                        "#1f4a3e"  // 6+
                     ];
 
                     const idx = (n && n > 0)
@@ -161,15 +162,15 @@
                     return {
                         fillColor: (idx >= 0) ? ramp[idx] : "#f5f6f7",
                         weight: 0.5,
-                        color: (idx >= 0) ? "#8E0152" : "#BFC6CC",
-                        fillOpacity: (idx >= 0) ? 0.75 : 0.15
+                        color: (idx >= 0) ? "#ffffff" : "#BFC6CC",
+                        fillOpacity: (idx >= 0) ? 0.85 : 0.15
                     };
                 }
 
                 function onEachCountry(feature, layer) {
                     if (feature.properties.n_authors && feature.properties.n_authors > 0) {
                         const props = feature.properties || {};
-                        const countryName = props.GEOUNIT || props.ADMIN || props.NAME || props.SOVEREIGNT || props.ISO_A3 || "";
+                        const countryName = countryNames[props.ISO3] || props.ISO3 || "";
                         const authors = (props.authors || "").trim();
 
                         layer.bindTooltip(
@@ -179,7 +180,7 @@
                         );
 
                         layer.on({
-                            mouseover: e => e.target.setStyle({ weight: 1.5, color: "#111", fillOpacity: 0.9 }),
+                            mouseover: e => e.target.setStyle({ weight: 1.5, color: "#1d2422", fillOpacity: 0.95 }),
                             mouseout: e => geojson.resetStyle(e.target)
                         });
                     }
@@ -194,7 +195,7 @@
                     })
                     .then(data => {
                         const featureCount = (data && data.features && data.features.length) ? data.features.length : 0;
-                        setStatus(`Map status: rendered (${featureCount} countries).`);
+                        setStatus(`${featureCount} countries`);
 
                         geojson = L.geoJSON(data, {
                             style: countryStyle,
@@ -205,10 +206,7 @@
                         if (bounds && bounds.isValid && bounds.isValid()) {
                             map.fitBounds(bounds);
                             
-                            // Hide status after successful load
-                            setTimeout(() => {
-                                if (statusEl) statusEl.style.display = 'none';
-                            }, 3000);
+                            if (statusEl) statusEl.style.display = 'none';
                         }
                     })
                     .catch(error => {
