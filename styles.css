@@ -389,7 +389,8 @@ a:hover {
     font-family: var(--sans);
 }
 
-.leaflet-tooltip {
+#collab-map .leaflet-tooltip {
+    width: max-content;
     border: 1px solid var(--line);
     border-radius: 4px;
     box-shadow: var(--shadow);
@@ -401,7 +402,7 @@ a:hover {
     white-space: normal;
 }
 
-.leaflet-tooltip strong {
+#collab-map .leaflet-tooltip strong {
     font-family: var(--serif);
     font-size: 0.95rem;
     color: var(--ink);
