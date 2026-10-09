@@ -178,6 +178,10 @@ a:hover {
     margin-bottom: 1rem;
 }
 
+.content-section a {
+    overflow-wrap: anywhere;
+}
+
 .content-section ul {
     margin: 0 0 1rem 1.25rem;
 }
@@ -673,6 +677,18 @@ sup a {
         font-size: 16px;
     }
 
+    html {
+        scroll-padding-top: 1rem;
+    }
+
+    .navbar {
+        position: static;
+    }
+
+    #collab-map .leaflet-tooltip {
+        max-width: 200px;
+    }
+
     .nav-container {
         flex-direction: column;
         align-items: flex-start;
@@ -706,7 +722,9 @@ sup a {
     }
 
     .finding-page {
-        min-width: 82vw;
+        width: 80vw;
+        min-width: 0;
+        max-width: 80vw;
         padding: 1.5rem;
     }
 }
