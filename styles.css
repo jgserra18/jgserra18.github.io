@@ -383,6 +383,18 @@ a:hover {
     height: 0.6rem;
 }
 
+.collab-detail {
+    display: none;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+}
+
+.collab-detail strong {
+    font-family: var(--serif);
+    color: var(--ink);
+}
+
 #collab-status {
     font-size: 0.85rem;
     color: var(--faint);
@@ -685,8 +697,8 @@ sup a {
         position: static;
     }
 
-    #collab-map .leaflet-tooltip {
-        max-width: 200px;
+    .collab-detail {
+        display: block;
     }
 
     .nav-container {

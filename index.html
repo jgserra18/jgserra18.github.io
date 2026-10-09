@@ -80,6 +80,7 @@
 
             <p id="collab-status">Loading collaborations…</p>
             <div id="collab-map"></div>
+            <p id="collab-detail" class="collab-detail" aria-live="polite">Tap a highlighted country to see co-authors.</p>
 
             <div class="map-meta">
                 <div class="map-legend" aria-hidden="true">
@@ -139,6 +140,15 @@
 
                 // Load collaboration data
                 let geojson;
+                const useTooltips = window.matchMedia("(min-width: 769px)").matches;
+                const detailEl = document.getElementById("collab-detail");
+                function showDetail(name, authors) {
+                    if (!detailEl) return;
+                    detailEl.innerHTML = "";
+                    const strong = document.createElement("strong");
+                    strong.textContent = name;
+                    detailEl.append(strong, document.createTextNode(" — " + authors));
+                }
                 const countryNames = {
                     AUT: "Austria", CHN: "China", DEU: "Germany", DNK: "Denmark", ESP: "Spain",
                     FRA: "France", GRC: "Greece", JPN: "Japan", NLD: "Netherlands", PRT: "Portugal",
@@ -173,14 +183,20 @@
                         const countryName = countryNames[props.ISO3] || props.ISO3 || "";
                         const authors = (props.authors || "").trim();
 
-                        layer.bindTooltip(
-                            `<strong>${countryName}</strong><br>
-                             ${authors}`,
-                            { sticky: true, direction: "auto", opacity: 0.95 }
-                        );
+                        if (useTooltips) {
+                            layer.bindTooltip(
+                                `<strong>${countryName}</strong><br>
+                                 ${authors}`,
+                                { sticky: true, direction: "auto", opacity: 0.95 }
+                            );
+                        }
 
                         layer.on({
-                            mouseover: e => e.target.setStyle({ weight: 1.5, color: "#1d2422", fillOpacity: 0.95 }),
+                            click: () => showDetail(countryName, authors),
+                            mouseover: e => {
+                                e.target.setStyle({ weight: 1.5, color: "#1d2422", fillOpacity: 0.95 });
+                                showDetail(countryName, authors);
+                            },
                             mouseout: e => geojson.resetStyle(e.target)
                         });
                     }
