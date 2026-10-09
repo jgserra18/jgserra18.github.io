@@ -452,6 +452,10 @@ a:hover {
     color: var(--muted);
 }
 
+.scholar-note {
+    margin-top: 2rem;
+}
+
 .publication-item.featured {
     padding: 1.25rem 1.5rem;
     margin-bottom: 1rem;
